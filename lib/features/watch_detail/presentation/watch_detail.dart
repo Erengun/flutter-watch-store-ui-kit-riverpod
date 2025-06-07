@@ -90,11 +90,16 @@ class WatchDetails extends HookWidget {
                       scale: scaleAnimation,
                       child: Container(
                         width: 300,
-                        height: 300,
+                        height: 350,
                         margin: const EdgeInsets.only(top: 60),
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                            bottomLeft: Radius.circular(32),
+                            bottomRight: Radius.circular(32),
+                          ),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
                               color: Colors.black.withOpacity(0.15),
@@ -103,19 +108,20 @@ class WatchDetails extends HookWidget {
                             ),
                           ],
                         ),
-                        child: Image.asset(
-                          watch.image,
-                          fit: BoxFit.fitHeight,
-                          width: 280,
-                          height: 280,
-                          gaplessPlayback: true,
-                          errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-                            return const Icon(
-                              Icons.watch,
-                              size: 140,
-                              color: Colors.grey,
-                            );
-                          },
+                        child: Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Image.asset(
+                            watch.image,
+                            fit: BoxFit.contain,
+                            gaplessPlayback: true,
+                            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                              return const Icon(
+                                Icons.watch,
+                                size: 140,
+                                color: Colors.grey,
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
