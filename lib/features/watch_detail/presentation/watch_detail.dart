@@ -1,38 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../utils/context_extensions.dart';
 import '../../store/domain/product.dart';
 
-class WatchDetails extends StatefulWidget {
-  const WatchDetails({super.key, required this.watch, required this.tag});
+class WatchDetails extends HookWidget {
+  const WatchDetails({super.key, required this.watch});
   final Product watch;
-  final String tag;
-
-  @override
-  State<WatchDetails> createState() => _WatchDetailsState();
-}
-
-class _WatchDetailsState extends State<WatchDetails> {
-  int cartItemCount = 1;
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<int> cartItemCount = useState(1);
+    
+    // Simple opening animation
+    final AnimationController animationController = useAnimationController(
+      duration: const Duration(milliseconds: 1200),
+    );
+    
+
+    final double scaleAnimation = useAnimation(
+      Tween<double>(begin: 0.8, end: 1).animate(
+        CurvedAnimation(
+          parent: animationController, 
+          curve: const Interval(0.2, 1, curve: Curves.elasticOut), // Slower scale (80% of duration, starts later)
+        ),
+      ),
+    );
+    
+    // Start animation on build
+    useEffect(() {
+      animationController.forward();
+      return null;
+    }, <Object?>[]);
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
       body: CustomScrollView(
         slivers: <Widget>[
-          // Watch image in collapsing app bar
           SliverAppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
             pinned: true,
-            expandedHeight: MediaQuery.of(context).size.height * 0.5,
+            expandedHeight: MediaQuery.sizeOf(context).height * 0.5,
             leading: IconButton(
               onPressed: () => Navigator.pop(context),
               icon: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withAlpha(230),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(Icons.arrow_back, color: Colors.black),
@@ -44,7 +59,7 @@ class _WatchDetailsState extends State<WatchDetails> {
                 icon: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withAlpha(230),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.favorite_border, color: Colors.black),
@@ -69,10 +84,10 @@ class _WatchDetailsState extends State<WatchDetails> {
                       )
                     ],
                   ),
-                  // Watch image with hero animation
+                  // Animated watch image
                   Center(
-                    child: Hero(
-                      tag: widget.tag,
+                    child: Transform.scale(
+                      scale: scaleAnimation,
                       child: Container(
                         width: 300,
                         height: 300,
@@ -89,7 +104,7 @@ class _WatchDetailsState extends State<WatchDetails> {
                           ],
                         ),
                         child: Image.asset(
-                          widget.watch.image,
+                          watch.image,
                           fit: BoxFit.fitHeight,
                           width: 280,
                           height: 280,
@@ -109,7 +124,6 @@ class _WatchDetailsState extends State<WatchDetails> {
               ),
             ),
           ),
-          // Content section
           SliverToBoxAdapter(
             child: DecoratedBox(
               decoration: const BoxDecoration(
@@ -132,7 +146,7 @@ class _WatchDetailsState extends State<WatchDetails> {
                           text: TextSpan(
                             children: <InlineSpan>[
                               TextSpan(
-                                text: widget.watch.brand,
+                                text: watch.brand,
                                 style: const TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w600,
@@ -140,7 +154,7 @@ class _WatchDetailsState extends State<WatchDetails> {
                                 ),
                               ),
                               TextSpan(
-                                text: ' ${widget.watch.name}',
+                                text: ' ${watch.name}',
                                 style: const TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w300,
@@ -152,7 +166,7 @@ class _WatchDetailsState extends State<WatchDetails> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          '${widget.watch.model} • ${widget.watch.category}',
+                          '${watch.model} • ${watch.category}',
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
@@ -172,20 +186,21 @@ class _WatchDetailsState extends State<WatchDetails> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  CounterButton(icon: Icons.remove, onTap: () {
-                                      setState(() {
-                                        cartItemCount = cartItemCount > 1
-                                            ? cartItemCount - 1
-                                            : 1;
-                                      });
-                                    }),
+                                  CounterButton(
+                                    icon: Icons.remove,
+                                    onTap: () {
+                                      if (cartItemCount.value > 1) {
+                                        cartItemCount.value -= 1;
+                                      }
+                                    },
+                                  ),
                                   Container(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 20,
                                       vertical: 12,
                                     ),
                                     child: Text(
-                                      '$cartItemCount',
+                                      '${cartItemCount.value}',
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 18,
@@ -193,17 +208,18 @@ class _WatchDetailsState extends State<WatchDetails> {
                                       ),
                                     ),
                                   ),
-                                  CounterButton(icon: Icons.add, onTap: () {
-                                      setState(() {
-                                        cartItemCount += 1;
-                                      });
-                                    }),
+                                  CounterButton(
+                                    icon: Icons.add,
+                                    onTap: () {
+                                      cartItemCount.value += 1;
+                                    },
+                                  ),
                                 ],
                               ),
                             ),
                             const Spacer(),
                             Text(
-                              '\$${(widget.watch.price * cartItemCount).toStringAsFixed(2)}',
+                              '\$${(watch.price * cartItemCount.value).toStringAsFixed(2)}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 28,
@@ -215,7 +231,7 @@ class _WatchDetailsState extends State<WatchDetails> {
                         const SizedBox(height: 24),
                         // Description
                         Text(
-                          widget.watch.description,
+                          watch.description,
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
@@ -244,11 +260,10 @@ class _WatchDetailsState extends State<WatchDetails> {
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Add to cart logic
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Added $cartItemCount ${widget.watch.name} to cart',
+                                    'Added ${cartItemCount.value} ${watch.name} to cart',
                                   ),
                                 ),
                               );
@@ -269,7 +284,6 @@ class _WatchDetailsState extends State<WatchDetails> {
                             ),
                           ),
                         ),
-                        // Bottom padding for safe area
                         SizedBox(height: MediaQuery.of(context).padding.bottom + 24),
                       ],
                     ),
