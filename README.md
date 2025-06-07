@@ -1,27 +1,48 @@
-# Flutter Riverpod Template - 2025 Edition
+# 🔥 Flutter Watch Store UI Kit - 2025 Edition with Riverpod 🔥 ⌚️ 💫
 
-## Modern Flutter Architecture Template with Riverpod
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Twitter Follow](https://img.shields.io/twitter/follow/iam_olayemii.svg?style=social)](https://twitter.com/iam_olayemii)
 
-A production-ready Flutter template built with the latest packages and best practices, supporting Flutter 3.32 and above. This template implements clean architecture principles and provides a robust foundation for building scalable applications.
+![GitHub Repo stars](https://img.shields.io/github/stars/Erengun/flutter-watch-store-ui-kit-riverpod?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/Erengun/flutter-watch-store-ui-kit-riverpod?style=social) ![GitHub](https://img.shields.io/github/license/Erengun/flutter-watch-store-ui-kit-riverpod)
+
+## Modern Watch Store App with Riverpod Architecture
+
+A beautiful, production-ready Flutter watch store app built with the latest packages and best practices, supporting Flutter 3.32 and above. This project combines stunning UI design with clean architecture principles and modern state management.
+
+**Original UI Design Credit:** This app is based on the beautiful watch store UI kit originally created by [Olayemi Garuba](https://twitter.com/iam_olayemii). The original design has been modernized and updated for 2025 with null safety, latest Flutter features, and Riverpod state management.
 
 ---
 
-### Key Features
+### 🚀 Key Features
 
+**UI & Design:**
+- 🎨 Beautiful watch store interface with modern Material 3 design
+- 📱 Responsive UI with adaptive widgets for all screen sizes
+- ⌚️ Elegant product showcase and detailed watch views
+- 🛒 Complete shopping cart and checkout flow
+- 💳 Modern payment interface design
+
+**Architecture & State Management:**
 - 🏗️ Clean Architecture with Domain-Driven Design
-- 🎯 Riverpod 2.6+ with code generation
-- 🔒 Built-in authentication pack with secure storage (Hive CE + AES-256)
+- 🎯 Riverpod 2.6+ with code generation for type-safe state management
+- 🔒 Built-in authentication system with secure storage (Hive CE + AES-256)
 - 🌐 Type-safe API integration with Dio 5.8+
-- 📱 Responsive UI with adaptive widgets
 - 🌍 Internationalization ready with Easy Localization
-- 💾 Secure local storage with Hive CE
-- 🧪 Pre-configured unit testing for authentication and controller logic
+- 💾 Secure local storage for user preferences and cart data
+- 🧪 Pre-configured unit testing for business logic
 - ⚡ Modern navigation with GoRouter 14.8+
 - 🛠️ Custom linting and devtools configuration
 
 ---
 
-## Tech Stack
+## 📱 Screenshots
+
+![Screenshot 1](https://res.cloudinary.com/olayemii/image/upload/v1611747047/assets/ss5_hy4cek.png) ![Screenshot 2](https://res.cloudinary.com/olayemii/image/upload/v1611747018/assets/ss6_zkqegd.png) ![Screenshot 3](https://res.cloudinary.com/olayemii/image/upload/v1611747017/assets/ss7_mkqegd.png)
+
+![Main Page](https://res.cloudinary.com/olayemii/image/upload/v1611749056/assets/watch-1_y4mpof.png)
+
+---
+
+## 🛠️ Tech Stack
 
 **Core Libraries:**
 - State Management: Riverpod 2.6.1, Freezed 3.0.6 (immutable state)
@@ -37,37 +58,45 @@ A production-ready Flutter template built with the latest packages and best prac
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 lib/
 ├── common/            # Shared widgets and components
-├── config/            # App configuration (theme etc.)
+├── config/            # App configuration (theme, colors)
 ├── constants/         # App-wide constants (endpoints, assets)
 ├── core/              # Core functionality, network layer
-├── features/          # Feature modules (authentication, home, ...)
-│   └── authentication/
-│       ├── data/
-│       ├── domain/
-│       └── presentation/
+├── features/          # Feature modules
+│   ├── authentication/    # Login, register, profile
+│   ├── home/             # Main dashboard and watch catalog
+│   ├── product/          # Product details and reviews
+│   ├── cart/             # Shopping cart management
+│   └── checkout/         # Payment and order processing
 ├── hive/              # Local storage setup and adapters
-├── router/            # Navigation & routing
-├── utils/             # Utility functions
+├── router/            # Navigation & routing configuration
+├── utils/             # Utility functions and helpers
 ├── main.dart          # App entry point
-└── my_app.dart        # App configuration
+└── my_app.dart        # App configuration and themes
 ```
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
+### 💻 Requirements
 
-### Setup
+- Any Operating System (MacOS, Linux, Windows)
+- Any IDE with Flutter SDK installed (Android Studio, VSCode etc)
+- Flutter 3.32 or above
+- Dart 3.0 or above
+- A little knowledge of Dart, Flutter, and Riverpod
 
-1. **Clone the template:**
+### 🔧 Setup
+
+1. **Clone the repository:**
     ```bash
-    git clone https://github.com/Erengun/Flutter-Riverpod-2.0-Template.git my_app
-    cd my_app
+    git clone https://github.com/Erengun/flutter-watch-store-ui-kit-riverpod.git
+    cd flutter-watch-store-ui-kit-riverpod
     ```
 
 2. **Install dependencies:**
@@ -83,6 +112,7 @@ lib/
 4. **Setup environment:**
     ```bash
     cp .env.example .env
+    # Edit .env file with your API endpoints and configurations
     ```
 
 5. **Run the app:**
@@ -92,33 +122,33 @@ lib/
 
 ---
 
-## Authentication Module
+## 🔐 Authentication Module
 
-The template includes a complete authentication system with secure credential storage and error handling.
+The app includes a complete authentication system with secure credential storage and error handling.
 
 ### How it works
 
-- **Login & Registration:** Uses Dio to POST to `/api/login` and `/api/register` endpoints.
-- **Credential Caching:** Credentials are securely cached in Hive CE using AES-256 encryption, with key derived per-device.
-- **State Management:** All authentication UI and logic is managed via Riverpod notifiers and state classes.
-- **Error Handling:** All network and validation errors are surfaced in the UI.
-- **Loading State:** UI reflects loading and error states for a smooth UX.
+- **Login & Registration:** Uses Dio to POST to `/api/login` and `/api/register` endpoints
+- **Credential Caching:** Credentials are securely cached in Hive CE using AES-256 encryption
+- **State Management:** All authentication UI and logic managed via Riverpod notifiers
+- **Error Handling:** Network and validation errors are properly surfaced in the UI
+- **Loading States:** Smooth UX with proper loading and error state management
 
 **Example:**
 ```dart
 @riverpod
 class LoginController extends _$LoginController {
-  // ... state and logic here
   Future<LoginResponse> login({required String email, required String password}) async {
     // Handles login, error handling, caching, loading state etc.
   }
 }
 ```
+
 ---
 
-## Testing
+## 🧪 Testing
 
-- Integrated tests for auth controller logic (`test/features/login_controller_test.dart`)
+- Integrated tests for authentication and business logic
 - Run tests with:
     ```bash
     flutter test
@@ -126,28 +156,46 @@ class LoginController extends _$LoginController {
 
 ---
 
-## Documentation
-
-- Up-to-date documentation in this README
-- Code comments and examples throughout
-
----
-
-## Contributing
+## 🤝 Contributing
 
 See our [Contributing Guide](CONTRIBUTING.md) for details on how to:
 - Set up your development environment
-- Run tests
+- Run tests and code generation
 - Submit pull requests
+- Report issues
+
+PRs are welcomed. Issues are welcomed too.
 
 ---
 
-## License
+## 💖 Support
+
+> ⭐️ Star the repo to show support. ⭐️
+
+> You can also support the project by buying me a cup of coffee ☕️.
+
+> <a href="https://www.buymeacoffee.com/xPGLYEr"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=xPGLYEr&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00"></a>
+
+---
+
+## 👨‍💻 Credits
+
+**Original UI Design:** [Olayemi Garuba](https://twitter.com/iam_olayemii) - Creator of the original beautiful watch store UI kit
+
+**2025 Modernization:** [Eren Gün](https://www.erengun.dev) - Updated with modern Flutter, Riverpod architecture, and null safety
+
+**UI Kit Source:** Based on designs from UpLabs 💓
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Contact
+## 📞 Contact
 
-- [https://www.erengun.dev](https://www.erengun.dev)
+- **Project Maintainer:** [https://www.erengun.dev](https://www.erengun.dev)
+- **Original Designer:** [Olayemi Garuba on Twitter](https://twitter.com/iam_olayemii)
+- **UI Suggestions:** [info@flutterpanda.com](mailto:info@flutterpanda.com)
