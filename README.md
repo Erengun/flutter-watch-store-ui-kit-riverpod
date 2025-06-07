@@ -36,7 +36,7 @@ A beautiful, production-ready Flutter watch store app built with the latest pack
 
 ## 📱 Screenshots
 
-![Screenshot 1](https://res.cloudinary.com/olayemii/image/upload/v1611747047/assets/ss5_hy4cek.png) ![Screenshot 2](https://res.cloudinary.com/olayemii/image/upload/v1611747018/assets/ss6_zkqegd.png) ![Screenshot 3](https://res.cloudinary.com/olayemii/image/upload/v1611747017/assets/ss7_mkqegd.png)
+![Screenshot 1](https://res.cloudinary.com/olayemii/image/upload/v1611747047/assets/ss5_hy4cek.png) ![Screenshot 2](https://res.cloudinary.com/olayemii/image/upload/v1611747018/assets/ss6_zkqegd.png) ![Screenshot 3](https://res.cloudinary.com/olayemii/image/upload/v1611747017/assets/ss7_mkwjtf.png)
 
 ![Main Page](https://res.cloudinary.com/olayemii/image/upload/v1611749056/assets/watch-1_y4mpof.png)
 
